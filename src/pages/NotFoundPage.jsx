@@ -7,7 +7,7 @@ const NotFoundPage = () => {
   return (
     <div className={css.error}>
       <Link className={css.errorLink} to="/">
-        <AiOutlineArrowLeft /> Return to home page
+        <AiOutlineArrowLeft /> Повернутися на головну сторінку
       </Link>
       <img src={img} alt="Page not found..." />
     </div>
