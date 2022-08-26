@@ -56,6 +56,7 @@ const SingleMoviePage = () => {
 
   // const getYear = () => new Date(state.item.release_date).getFullYear();
 
+  const { loading, error } = state;
   const { title, overview, poster_path, vote_average } = state.item;
 
   return (
@@ -72,6 +73,8 @@ const SingleMoviePage = () => {
       <p>{overview}</p>
       <h3>Рейтинг:</h3>
       <p>{vote_average}</p>
+      {loading && <p>... завантажується кінофільм</p>}
+      {error && <p>Помилка заванаження!</p>}
     </div>
   );
 };

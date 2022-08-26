@@ -18,6 +18,11 @@ const MovieSearchForm = ({ onSubmit }) => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
+
+    // if (state.query.trim() === '') {
+    //   alert('Введіть назву фільму!');
+    // }
+
     onSubmit({ ...state });
     setState({
       query: '',
@@ -28,7 +33,7 @@ const MovieSearchForm = ({ onSubmit }) => {
     <form className={css.searchForm} onSubmit={handleSubmit}>
       <input
         className={css.searchFormInput}
-        // type="text"
+        type="text"
         value={state.query}
         name="query"
         autoComplete="off"
