@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-
+import { useSearchParams } from 'react-router-dom';
 import MovieSearchForm from 'modules/MovieSearshForm';
 import { getSearchMovies } from 'modules/api';
 import css from '../modules/Menu.module.css';
@@ -12,7 +12,9 @@ const MovieSearchPage = () => {
     error: null,
   });
 
-  const [search, setSearch] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const query = searchParams.get('query');
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -22,7 +24,7 @@ const MovieSearchPage = () => {
           loading: true,
           error: null,
         }));
-        const data = await getSearchMovies(search);
+        const data = await getSearchMovies(query);
         setState(prevState => ({
           ...prevState,
           items: data,
@@ -39,13 +41,13 @@ const MovieSearchPage = () => {
         }));
       }
     };
-    if (search) {
+    if (query) {
       fetchMovies();
     }
-  }, [search]);
+  }, [query]);
 
-  const changeSearch = ({ search }) => {
-    setSearch(search);
+  const changeSearch = ({ query }) => {
+    setSearchParams({ query });
   };
 
   const { items, loading, error } = state;
@@ -57,7 +59,7 @@ const MovieSearchPage = () => {
           color: 'white',
         }}
       >
-        Movie search page
+        Сторінка пошуку кінофільмів
       </h3>
       <MovieSearchForm onSubmit={changeSearch} />
       {items.length > 0 && <MovieList items={items} />}

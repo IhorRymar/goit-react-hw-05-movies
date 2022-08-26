@@ -7,6 +7,11 @@ const HomePage = () => {
       <h3
         style={{
           color: 'white',
+          fontSize: '32px',
+          fontStyle: 'italic',
+          display: 'flex',
+          alignItems: 'center',
+          flexDirection: 'column',
         }}
       >
         Тренди тижня

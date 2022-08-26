@@ -12,6 +12,7 @@ const UserRoutes = () => {
       <Route path="/movies" element={<MovieSearchPage />} />
       <Route path="/movies/:id" element={<SingleMoviePage />} />
       <Route path="*" element={<NotFoundPage />} />
+      {/* <Route path="*" element={<HomePage />} /> */}
     </Routes>
   );
 };

@@ -4,9 +4,8 @@ import noImg from '../images/Poster_not_available.jpg';
 
 const IMG_URL = 'https://image.tmdb.org/t/p/w500/';
 
-// const getYear = () => new Date(state.items.release_date).getFullYear();
-
 const MovieList = ({ items }) => {
+  // const getYear = () => new Date(items.release_date).getFullYear();
   const elements = items.map(({ id, title, poster_path }) => (
     <li key={id}>
       <Link to={`/movies/${id}`}>

@@ -5,7 +5,7 @@ import css from '../modules/Menu.module.css';
 
 const MovieSearchForm = ({ onSubmit }) => {
   const [state, setState] = useState({
-    search: '',
+    query: '',
   });
 
   const handleChange = ({ target }) => {
@@ -20,7 +20,7 @@ const MovieSearchForm = ({ onSubmit }) => {
     evt.preventDefault();
     onSubmit({ ...state });
     setState({
-      search: '',
+      query: '',
     });
   };
 
@@ -29,8 +29,8 @@ const MovieSearchForm = ({ onSubmit }) => {
       <input
         className={css.searchFormInput}
         // type="text"
-        value={state.search}
-        name="search"
+        value={state.query}
+        name="query"
         autoComplete="off"
         autoFocus
         required
