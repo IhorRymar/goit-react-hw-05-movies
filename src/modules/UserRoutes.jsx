@@ -1,19 +1,27 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import HomePage from 'pages/HomePage';
-import MovieSearchPage from 'pages/MovieSearchPage';
-import SingleMoviePage from 'pages/SingleMoviePage';
-import NotFoundPage from 'pages/NotFoundPage';
+const HomePage = lazy(() => import('pages/HomePage'));
+const MovieSearchPage = lazy(() => import('pages/MovieSearchPage'));
+const SingleMoviePage = lazy(() => import('pages/SingleMoviePage'));
+const ReviewsPage = lazy(() => import('pages/ReviewsPage'));
+const CreditsPage = lazy(() => import('pages/CreditsPage'));
+// const NotFoundPage = lazy(() => import ('pages/NotFoundPage'));
 
 const UserRoutes = () => {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/movies" element={<MovieSearchPage />} />
-      <Route path="/movies/:id" element={<SingleMoviePage />} />
-      <Route path="*" element={<NotFoundPage />} />
-      {/* <Route path="*" element={<HomePage />} /> */}
-    </Routes>
+    <Suspense fallback={<p>... завантаження сторінки</p>}>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/movies" element={<MovieSearchPage />} />
+        <Route path="/movies/:id" element={<SingleMoviePage />}>
+          <Route path="reviews" element={<ReviewsPage />} />
+          <Route path="credits" element={<CreditsPage />} />
+        </Route>
+        {/* <Route path="*" element={<NotFoundPage />} /> */}
+        <Route path="*" element={<HomePage />} />
+      </Routes>
+    </Suspense>
   );
 };
 export default UserRoutes;

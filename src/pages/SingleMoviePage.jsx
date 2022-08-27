@@ -1,7 +1,15 @@
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import {
+  NavLink,
+  Outlet,
+  useParams,
+  useNavigate,
+  useLocation,
+} from 'react-router-dom';
 import { getSingleMovie } from 'modules/api';
+import { AiOutlineArrowLeft } from 'react-icons/ai';
 import noImg from '../images/Poster_not_available.jpg';
+import { getClassName } from '../modules/Menu';
 
 import css from '../modules/Menu.module.css';
 
@@ -16,6 +24,9 @@ const SingleMoviePage = () => {
 
   const { id } = useParams();
   const navigate = useNavigate();
+
+  const location = useLocation();
+  const from = location.state?.from || '/movies';
 
   useEffect(() => {
     const fetchMovie = async () => {
@@ -52,27 +63,52 @@ const SingleMoviePage = () => {
     fetchMovie();
   }, [id]);
 
-  const goBack = () => navigate(-1);
-
-  // const getYear = () => new Date(state.item.release_date).getFullYear();
+  const goBack = () => navigate(from);
 
   const { loading, error } = state;
-  const { title, overview, poster_path, vote_average } = state.item;
+  const { title, overview, poster_path, vote_average, release_date } =
+    state.item;
+
+  const getYear = () => new Date(release_date).getFullYear();
 
   return (
-    <div className={css.singleMovieContainer}>
-      <button onClick={goBack}>Назад</button>
-      <img
-        src={poster_path ? `${IMG_URL}${poster_path}` : noImg}
-        alt={title}
-        width="300"
-      />
-      <h2>{title}</h2>
-      {/* <p>{getYear()}</p> */}
-      <h3>Опис фільму:</h3>
-      <p>{overview}</p>
-      <h3>Рейтинг:</h3>
-      <p>{vote_average}</p>
+    <div className={css.container}>
+      <button className={css.singleMoviePageBtn} onClick={goBack}>
+        <AiOutlineArrowLeft /> Назад
+      </button>
+      <div className={css.singleMovieContainer}>
+        <img
+          src={poster_path ? `${IMG_URL}${poster_path}` : noImg}
+          alt={title}
+          width="300"
+        />
+        <h2>
+          {title} ({getYear()})
+        </h2>
+        <p>
+          <b>Опис фільму:</b> {overview}
+        </p>
+        <p>
+          <b>Рейтинг:</b> {vote_average}
+        </p>
+      </div>
+      <div className={css.singleMovieLinks}>
+        <NavLink
+          state={{ from }}
+          className={getClassName}
+          to={`/movies/${id}/credits`}
+        >
+          Актори
+        </NavLink>
+        <NavLink
+          state={{ from }}
+          className={getClassName}
+          to={`/movies/${id}/reviews`}
+        >
+          Відгуки
+        </NavLink>
+      </div>
+      <Outlet />
       {loading && <p>... завантажується кінофільм</p>}
       {error && <p>Помилка заванаження!</p>}
     </div>

@@ -6,7 +6,6 @@ const HomePage = () => {
     <div className={css.container}>
       <h3
         style={{
-          color: 'white',
           fontSize: '32px',
           fontStyle: 'italic',
           display: 'flex',

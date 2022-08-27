@@ -54,13 +54,6 @@ const MovieSearchPage = () => {
 
   return (
     <div className={css.container}>
-      <h3
-        style={{
-          color: 'white',
-        }}
-      >
-        Сторінка пошуку кінофільмів
-      </h3>
       <MovieSearchForm onSubmit={changeSearch} />
       {items.length > 0 && <MovieList items={items} />}
       {loading && <p>... завантажуються кінофільми</p>}

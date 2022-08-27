@@ -35,3 +35,19 @@ export const getSearchMovies = async (query, page = 1) => {
 
   return response.data.results;
 };
+
+export const getReviews = async (id, page = 1) => {
+  const response = await instance.get(
+    `/movie/${id}${END_POINTS.movieReviews}?api_key=${API_KEY}&language=en-US&page=${page}`
+  );
+
+  return response.data.results;
+};
+
+export const getCredits = async id => {
+  const response = await instance.get(
+    `/movie/${id}${END_POINTS.movieCredits}?api_key=${API_KEY}&language=en-US`
+  );
+
+  return response.data.cast;
+};
