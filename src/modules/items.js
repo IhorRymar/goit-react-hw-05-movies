@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 const items = [
   {
     id: nanoid(),
-    to: '/',
+    to: '/goit-react-hw-05-movies',
     text: 'Головна сторінка',
   },
   {
