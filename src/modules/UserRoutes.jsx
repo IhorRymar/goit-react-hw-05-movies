@@ -12,7 +12,7 @@ const UserRoutes = () => {
   return (
     <Suspense fallback={<p>... завантаження сторінки</p>}>
       <Routes>
-        <Route path="/goit-react-hw-05-movies" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/movies" element={<MovieSearchPage />} />
         <Route path="/movies/:id" element={<SingleMoviePage />}>
           <Route path="reviews" element={<ReviewsPage />} />
